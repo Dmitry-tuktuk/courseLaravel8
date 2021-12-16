@@ -12,5 +12,9 @@
 
 {{$a}} <br>
 {{$string}}
+<br>
+{{ route('post', ['id' => 3, 'slug' => 'test-2' ]) }}
+<br>
+{{ route('admin.post', ['id' => 3 ]) }}
 </body>
 </html>

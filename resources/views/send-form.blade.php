@@ -10,6 +10,9 @@
 <body>
 
     <h1>Done!</h1>
+    @if(!empty($_POST))
+        {{dd($_POST)}}
+    @endif
 
 </body>
 </html>

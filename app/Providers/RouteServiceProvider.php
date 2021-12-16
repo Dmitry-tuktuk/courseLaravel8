@@ -47,6 +47,10 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
+
+        //Individual validation
+        Route::pattern('id','[0-9]+');
+        Route::pattern('slug','[A-Za-z0-9-]+');
     }
 
     /**
