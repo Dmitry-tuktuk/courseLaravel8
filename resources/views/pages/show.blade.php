@@ -8,9 +8,6 @@
     <title>Document</title>
 </head>
 <body>
-<h1>TITLE</h1>
-
-{{$name}} <br>
-{{$lastName}}
+    <h1>{{ $slug }} page</h1>
 </body>
 </html>

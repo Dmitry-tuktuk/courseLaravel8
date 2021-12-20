@@ -8,9 +8,12 @@
     <title>Document</title>
 </head>
 <body>
-<h1>TITLE</h1>
 
-{{$name}} <br>
-{{$lastName}}
+<form action="{{route('posts.store')}}" method="post">
+    @csrf
+    <input type="text" name="title">
+    <button type="submit">Submit</button>
+</form>
+
 </body>
 </html>

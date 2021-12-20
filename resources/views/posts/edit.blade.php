@@ -8,9 +8,13 @@
     <title>Document</title>
 </head>
 <body>
-<h1>TITLE</h1>
 
-{{$name}} <br>
-{{$lastName}}
+<form action="{{route('posts.update', ['id' => $id])}}" method="post">
+    @csrf
+    @method('PUT')
+    <input type="text" name="title">
+    <button type="submit">Submit</button>
+</form>
+
 </body>
 </html>
