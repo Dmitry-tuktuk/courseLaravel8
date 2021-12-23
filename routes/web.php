@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\DocController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Test\TestController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +21,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+#Поддомен
+Route::domain('{account}.example.com')->group(function () {
+    Route::get('user/{id}', function ($account, $id) {
+        //
+    });
+});
+
+#Домен
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/test', [HomeController::class, 'test']);
 Route::get('/test2', [TestController::class, 'index']);
@@ -28,10 +39,57 @@ Route::resource('/admin/posts', PostController::class, ['parameters' => [
 ]]);
 
 Route::fallback(function (){
-    //return redirect()->route('home');
+    #return redirect()->route('home');
     abort(404,'Oopsss! Page not found..........');
 });
 
 Route::get('/lara', function (){
-    
+
+});
+
+Route::match(['get', 'post'], '/match', [DocController::class, 'index']);
+Route::any('/match', [DocController::class, 'index']);
+
+#Redirect
+Route::redirect('/here', '/there', 301);
+
+#Route view
+Route::view('/welcome', '/welcome', ['name' => 'dev']);
+
+#URI params
+Route::get('/user/{id}', function ($id){
+   return "User - $id";
+});
+#?params
+Route::get('/params/{name?}', function ($name = null){
+   return "User - $name";
+});
+
+#Regular Expression Constraints
+Route::get('/user/{id}/{name}', function ($id, $name) {
+    //
+})->where(['id' => '[0-9]+', 'name' => '[a-z]+']);
+
+Route::get('/user/{id}/{name}', function ($id, $name) {
+    //
+})->whereNumber('id')->whereAlpha('name');
+
+#Names routes
+Route::get('/user/profile/{id}', [UserController::class, 'show'])->name('profile');
+
+#Middleware
+Route::middleware(['first', 'second'])->group(function () {
+    Route::get('/first', function () {
+        // Использует посредники `first` и `second` ...
+    });
+
+    Route::get('/second', function () {
+        // Использует посредники `first` и `second` ...
+    });
+});
+#prefix
+Route::prefix('admin')->group(function () {
+    Route::get('/users', function () {
+        // Соответствует URL-адресу `/admin/users` ...
+    });
 });
