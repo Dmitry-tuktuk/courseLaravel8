@@ -9,7 +9,7 @@ class PostController extends Controller
 
     public function __construct(Request $request)
     {
-        dump($request->route()->getName());
+
     }
 
     /**
@@ -76,6 +76,5 @@ class PostController extends Controller
     public function destroy($id)
     {
       dump(__METHOD__);
-      dd($id);
     }
 }
