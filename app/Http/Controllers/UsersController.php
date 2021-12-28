@@ -15,17 +15,19 @@ class UsersController extends Controller
         //$updatePost = DB::update('UPDATE posts SET title = ? WHERE id = ?', ['Статья 4', 5]);
         //$deletePost = DB::delete('DELETE FROM posts WHERE id = ?', [7]);
 
-        DB::beginTransaction();
-        try {
-            DB::update("UPDATE posts SET created_at = ? WHERE created_at IS NULL",[NOW()]);
-            DB::update("UPDATE posts SET updated_at = ? WHERE updated_at IS NULL",[NOW()]);
-            DB::commit();
-        } catch (\Exception $exception){
-            DB::rollBack();
-            echo $exception->getMessage();
-        }
+//        DB::beginTransaction();
+//        try {
+//            DB::update("UPDATE posts SET created_at = ? WHERE created_at IS NULL",[NOW()]);
+//            DB::update("UPDATE posts SET updated_at = ? WHERE updated_at IS NULL",[NOW()]);
+//            DB::commit();
+//        } catch (\Exception $exception){
+//            DB::rollBack();
+//            echo $exception->getMessage();
+//        }
 
         $users = DB::select("SELECT * FROM users");
+        dd($users);
+
 
         //$users = DB::table('users')->get();
         return view('users.index', compact('users'));

@@ -103,3 +103,4 @@ Route::get('/test', function (){
     return view('components.alert');
 });
 Route::get('/users', [UsersController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index']);
