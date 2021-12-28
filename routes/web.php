@@ -6,6 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Test\TestController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ use Illuminate\Http\Request;
 |
 */
 
-#Поддомен
+/*#Поддомен
 Route::domain('{account}.example.com')->group(function () {
     Route::get('user/{id}', function ($account, $id) {
         //
@@ -92,4 +93,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/users', function () {
         // Соответствует URL-адресу `/admin/users` ...
     })->middleware('admin');
+});*/
+
+Route::get('/', function () {
+    return response('Hello World', 200)
+        ->header('Content-Type', 'text/plain');
 });
+Route::get('/test', function (){
+    return view('components.alert');
+});
+Route::get('/users', [UsersController::class, 'index']);
