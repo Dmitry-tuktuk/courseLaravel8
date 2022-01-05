@@ -28,4 +28,13 @@ class Post extends Model
             'title',
         ];
     */
+
+    // belongsTo - один к одному связь
+    public function rubric(){
+        return $this->belongsTo(Rubric::class);
+    }
+    // hasMany - один ко многим получить коментарии к посту
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

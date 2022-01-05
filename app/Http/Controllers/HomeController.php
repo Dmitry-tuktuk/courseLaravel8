@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 
 use App\Models\City;
+use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Post;
+use App\Models\Rubric;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -82,10 +84,33 @@ class HomeController extends Controller
 
         /*Удаление записей*/
 
-        $post = Post::find(7);
+//        $post = Post::find(7);
 //        $post->delete();
 //        Post::destroy(7);
-        Post::destroy([5,6]);
+//        Post::destroy([5,6]);
+
+        /*$post = Post::find(1);
+        $postTitle = $post->title;
+        $rubricName = $post->rubric->title;
+        dd($post, $postTitle, $rubricName);*/
+
+        /*$rubric = Rubric::find(2);
+        $postInRubric = $rubric->post->title;
+        dd($rubric, $postInRubric);*/
+
+        /*$post = Post::find(1);
+        foreach($post->comments as $comment){
+            dump($comment->title);
+        };*/
+
+/*        $post = Post::find(1);
+        dump($post->comments);*/
+        $comment = Comment::find(2);
+        dd($comment->post->title);
+
+
+
+
 
 
 
