@@ -8,6 +8,7 @@ use App\Models\Comment;
 use App\Models\Country;
 use App\Models\Post;
 use App\Models\Rubric;
+use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -105,13 +106,32 @@ class HomeController extends Controller
 
 /*        $post = Post::find(1);
         dump($post->comments);*/
-        $comment = Comment::find(2);
-        dd($comment->post->title);
+        /*$comment = Comment::find(2);
+        dump($comment->post->title);*/
 
+/*        $posts = Post::where('id', '>', 1)->get();
+        foreach($posts as $post){
+            dump($post->title, $post->comment);
+        }*/
 
+        // Ленивая, жадная загрузка - with('name')->
+/*        $comments = Comment::with('post')->where('id', '>', '0')->get();
+        foreach ($comments as $comment){
+            dump($comment->title, $comment->post->title);
+        }*/
 
+        //belongsToMany
+/*        $post = Post::find(2);
+        dump($post->title);
+        foreach($post->tags as $tag){
+            dump($tag->title);
+        }*/
 
-
+        $tag = Tag::find(4);
+        dump($tag->title);
+        foreach ($tag->posts as $post){
+            dump($post->title);
+        }
 
 
         return view('index.home');

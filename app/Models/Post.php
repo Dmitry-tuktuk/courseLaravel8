@@ -37,4 +37,8 @@ class Post extends Model
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+    public function tags() {
+        //belongsToMany - многие ко многим
+        return $this->belongsToMany(Tag::class);
+    }
 }
