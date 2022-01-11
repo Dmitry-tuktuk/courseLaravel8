@@ -95,7 +95,7 @@ Route::prefix('admin')->group(function () {
     })->middleware('admin');
 });*/
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return response('Hello World', 200)
         ->header('Content-Type', 'text/plain');
 });
@@ -103,4 +103,7 @@ Route::get('/test', function (){
     return view('components.alert');
 });
 Route::get('/users', [UsersController::class, 'index']);
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index']);*/
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/page/about', [PageController::class, 'show'])->name('page.about');
