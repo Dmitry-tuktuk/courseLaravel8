@@ -17,8 +17,14 @@ class HomeController extends Controller
 
         $title = 'Home page';
         $h1 = 'home page';
+        $date1 = range(1, 20);
+        $date2 = [
+          'title' => 'Title',
+          'content' => 'Content',
+          'keys' => 'Keywords',
+        ];
 
-        return view('index.home', compact('title', 'h1'));
+        return view('index.home', compact('title', 'h1', 'date1', 'date2'));
     }
 
     public function dbRequest(){
