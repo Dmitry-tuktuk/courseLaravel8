@@ -1,12 +1,23 @@
 @extends('layouts.main')
 
+@section('title')@parent - {{ $title }} @endsection
+
 @section('header')
 
 @section('content')
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Home page</h1>
+                <h1>{{ $h1 }}</h1>
+
+                {!! mb_strtoupper($h1) !!}
+
+                {{--Для JS-framework--}}
+                @{{ title }}
+
+                {{-- title --}}
+
+
             </div>
         </div>
     </section>

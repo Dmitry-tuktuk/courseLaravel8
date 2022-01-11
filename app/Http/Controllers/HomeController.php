@@ -15,9 +15,10 @@ class HomeController extends Controller
 {
     public function index(){
 
+        $title = 'Home page';
+        $h1 = 'home page';
 
-
-        return view('index.home');
+        return view('index.home', compact('title', 'h1'));
     }
 
     public function dbRequest(){
