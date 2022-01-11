@@ -15,16 +15,13 @@ class HomeController extends Controller
 {
     public function index(){
 
-        $title = 'Home page';
-        $h1 = 'home page';
-        $date1 = range(1, 20);
-        $date2 = [
-          'title' => 'Title',
-          'content' => 'Content',
-          'keys' => 'Keywords',
-        ];
+        $h1 = 'Home page';
 
-        return view('index.home', compact('title', 'h1', 'date1', 'date2'));
+        $title = 'Home';
+
+        $posts = Post::orderBy('id','desc')->get();
+
+        return view('index.home', compact('h1','posts', 'title'));
     }
 
     public function dbRequest(){
