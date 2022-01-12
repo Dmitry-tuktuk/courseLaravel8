@@ -11,6 +11,6 @@ class Rubric extends Model
 
     // hasOne - один к одному связь
     public function post(){
-        return $this->hasOne(Post::class);
+        return $this->belongsTo(Post::class);
     }
 }

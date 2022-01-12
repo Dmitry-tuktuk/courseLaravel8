@@ -9,6 +9,7 @@ use App\Models\Country;
 use App\Models\Post;
 use App\Models\Rubric;
 use App\Models\Tag;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -22,6 +23,29 @@ class HomeController extends Controller
         $posts = Post::orderBy('id','desc')->get();
 
         return view('index.home', compact('h1','posts', 'title'));
+    }
+
+    public function create(){
+        $title = 'Create post';
+        $rubrics = Rubric::pluck('title', 'id')->all();
+        return view('create', compact('rubrics', 'title'));
+    }
+
+    public function store(Request $request){
+
+        /*Построчное присваивание и сохранение*/
+
+        /*$post = new Post();
+        $post->title = $request->title;
+        $post->content = $request->content;
+        $post->rubric_id = $request->rubric_id;
+        $post->save();*/
+
+        /*Массовое присваивания и сохранение*/
+
+        Post::create($request->all());
+
+        return redirect()->route('home');
     }
 
     public function dbRequest(){

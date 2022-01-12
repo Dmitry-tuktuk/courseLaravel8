@@ -21,7 +21,8 @@ class Post extends Model
 
     protected $fillable = [
         'title',
-        'content'
+        'content',
+        'rubric_id'
         ];
     /*guarded - свойство которое запрещает записывать данные в колонку*/
 
@@ -32,7 +33,7 @@ class Post extends Model
 
     // belongsTo - один к одному связь
     public function rubric(){
-        return $this->belongsTo(Rubric::class);
+        return $this->hasMany(Rubric::class);
     }
     // hasMany - один ко многим получить коментарии к посту
     public function comments(){

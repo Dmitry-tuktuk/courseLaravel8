@@ -106,4 +106,7 @@ Route::get('/users', [UsersController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);*/
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/create', [HomeController::class, 'create'])->name('posts.create');
+Route::post('/', [HomeController::class, 'store'])->name('posts.store');
+
 Route::get('/page/about', [PageController::class, 'show'])->name('page.about');
