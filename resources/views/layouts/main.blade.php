@@ -21,6 +21,7 @@
 
 <main role="main">
 
+    @include('layouts.errors');
     @yield('content')
 
 </main>

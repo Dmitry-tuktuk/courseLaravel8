@@ -11,6 +11,7 @@ use App\Models\Rubric;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -42,6 +43,33 @@ class HomeController extends Controller
         $post->save();*/
 
         /*Массовое присваивания и сохранение*/
+
+/*        $validated = $request->validate([
+            'title' => 'required|unique:posts|max:255',
+            'body' => 'required',
+        ]);*/
+
+        $rules = [
+            'title' => 'required|min:5|max:255|',
+            'content' => 'required',
+            'rubric_id' => 'integer',
+        ];
+
+        $this->validate($request, $rules);
+
+/*        $messages = [
+            'title.required' => 'Заполните поле названия',
+            'title.min' => 'В поле названия минимальное количество 5 символов',
+            'title.max' => 'В поле названия максимальное количество 100 символов',
+            'content.required' => 'Заполните поле с текстом',
+            'rubric_id.integer' => 'Выберите рубрику для поста'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages)->validate();
+
+*/
+
+
 
         Post::create($request->all());
 
