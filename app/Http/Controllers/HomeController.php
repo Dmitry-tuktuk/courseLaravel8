@@ -15,13 +15,39 @@ use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
         $h1 = 'Home page';
-
         $title = 'Home';
-
         $posts = Post::orderBy('id','desc')->get();
+
+        /*Записать данные в сессию*/
+        $request->session()->put('test', 'testValue');
+        session()->put(['card' =>[
+            ['id' => '1', 'title' => 'Product 1'],
+            ['id' => '2', 'title' => 'Product 2'],
+        ]]);
+        /*Отобразить, получить данные из сессию*/
+        dump($request->session()->get('card')[1]['title']);
+        dump(session('card')[1]['title']);
+
+        /*Дополнить данные в сессии */
+        $request->session()->push('card', ['id' => 3, 'title' => 'Product 3']);
+
+        /*Удаление данные в сессии */
+        //Прочитать и стереть
+        //dump($request->session()->pull('testDelete'));
+
+        //Стереть запись
+        $request->session()->forget('testDelete');
+
+        //Очистить сессию
+        //$request->session()->flash();
+
+        /*Вывод*/
+        //dump($request->session()->all());
+        dump(session()->all());
+
 
         return view('index.home', compact('h1','posts', 'title'));
     }
@@ -44,7 +70,7 @@ class HomeController extends Controller
 
         /*Массовое присваивания и сохранение*/
 
-/*        $validated = $request->validate([
+        /*        $validated = $request->validate([
             'title' => 'required|unique:posts|max:255',
             'body' => 'required',
         ]);*/
@@ -57,7 +83,7 @@ class HomeController extends Controller
 
         $this->validate($request, $rules);
 
-/*        $messages = [
+        /*        $messages = [
             'title.required' => 'Заполните поле названия',
             'title.min' => 'В поле названия минимальное количество 5 символов',
             'title.max' => 'В поле названия максимальное количество 100 символов',
@@ -69,9 +95,9 @@ class HomeController extends Controller
 
 */
 
-
-
         Post::create($request->all());
+
+        $request->session()->flash('success', 'Created post');
 
         return redirect()->route('home');
     }
