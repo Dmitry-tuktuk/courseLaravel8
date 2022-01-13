@@ -21,7 +21,7 @@
 
 <main role="main">
 
-    @include('layouts.alerts');
+    @include('layouts.alerts')
     @yield('content')
 
 </main>

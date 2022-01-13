@@ -10,6 +10,9 @@ use App\Models\Post;
 use App\Models\Rubric;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,37 +20,70 @@ class HomeController extends Controller
 {
     public function index(Request $request){
 
-        $h1 = 'Home page';
-        $title = 'Home';
-        $posts = Post::orderBy('id','desc')->get();
+        /*Cookies*/
+
+        //Cookie::queue('test', 'Test value', 10);
+        //Cookie::queue(Cookie::forget('test'));
+        //dump($request->cookie('my_application_session'));
 
         /*Записать данные в сессию*/
-        $request->session()->put('test', 'testValue');
-        session()->put(['card' =>[
-            ['id' => '1', 'title' => 'Product 1'],
-            ['id' => '2', 'title' => 'Product 2'],
-        ]]);
-        /*Отобразить, получить данные из сессию*/
-        dump($request->session()->get('card')[1]['title']);
-        dump(session('card')[1]['title']);
+        //        $request->session()->put('test', 'testValue');
+//        session()->put(['card' =>[
+//            ['id' => '1', 'title' => 'Product 1'],
+//            ['id' => '2', 'title' => 'Product 2'],
+//        ]]);
+//        /*Отобразить, получить данные из сессию*/
+//        dump($request->session()->get('card')[1]['title']);
+//        dump(session('card')[1]['title']);
 
         /*Дополнить данные в сессии */
-        $request->session()->push('card', ['id' => 3, 'title' => 'Product 3']);
+        //$request->session()->push('card', ['id' => 3, 'title' => 'Product 3']);
 
         /*Удаление данные в сессии */
         //Прочитать и стереть
         //dump($request->session()->pull('testDelete'));
 
         //Стереть запись
-        $request->session()->forget('testDelete');
+        //$request->session()->forget('testDelete');
 
         //Очистить сессию
         //$request->session()->flash();
 
         /*Вывод*/
         //dump($request->session()->all());
-        dump(session()->all());
+        //dump(session()->all());
 
+        /*Записать в кеш*/
+        //Cache::put('key', 'value', 60);
+        //Cache::put('key', 'value');
+        //Cache::forever('key', 'value');
+
+        /*Получить из кеша*/
+        //dump(Cache::get('key'));
+
+
+        /*Записать и удалить кеш*/
+
+        //Cache::put('key', 'value', 60);
+
+        /*Cache::pull('key');
+        dump(Cache::get('key'));*/
+
+        //Cache::forget('key');
+
+        //Cache::flush();
+
+        //dump(Cache::get('key'));
+
+        if (Cache::has('posts')) {
+            $posts = Cache::get('posts');
+        } else {
+            $posts = Post::orderBy('id', 'desc')->get();
+            Cache::put('posts', $posts);
+        }
+
+        $h1 = 'Home page';
+        $title = 'Home';
 
         return view('index.home', compact('h1','posts', 'title'));
     }
@@ -98,8 +134,8 @@ class HomeController extends Controller
         Post::create($request->all());
 
         $request->session()->flash('success', 'Created post');
-
         return redirect()->route('home');
+
     }
 
     public function dbRequest(){
