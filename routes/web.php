@@ -109,7 +109,12 @@ Route::get('/home', [HomeController::class, 'index']);*/
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/create', [HomeController::class, 'create'])->name('posts.create');
 Route::post('/', [HomeController::class, 'store'])->name('posts.store');
-
 Route::get('/page/about', [PageController::class, 'show'])->name('page.about');
 
+/*send email*/
 Route::match(['get', 'post'], '/send', [ContactController::class, 'send'])->name('send-message');
+
+/*Auth*/
+Route::get('/register', [UserController::class, 'create'])->name('register.create');
+Route::post('/register', [UserController::class, 'store'])->name('register.store');
+

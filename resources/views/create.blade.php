@@ -10,8 +10,6 @@
 
     <div class="container">
 
-
-
         <form class="mt-5" method="post" action="{{ route('posts.store') }}">
 
             @csrf
