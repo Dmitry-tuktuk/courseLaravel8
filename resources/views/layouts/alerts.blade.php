@@ -7,6 +7,12 @@
         </div>
     @endif
 
+    @if(session('loginErrors'))
+        <div class="alert alert-danger">
+            {{ session('loginErrors') }}
+        </div>
+    @endif
+
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

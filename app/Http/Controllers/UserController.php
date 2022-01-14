@@ -40,4 +40,38 @@ class UserController extends Controller
         return redirect()->home();
 
     }
+
+    public function loginForm(){
+
+        $title = 'Login';
+
+        return view('users.login', compact('title'));
+
+    }
+
+    public function login(Request $request){
+
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
+
+        if (Auth::attempt([
+            'email'=> $request->email,
+            'password' => $request->password
+        ])) {
+            return redirect()->home();
+        } else {
+            return redirect()->back()->with('loginErrors', 'Incorrect login or password');
+        }
+
+    }
+
+    public function logout(){
+
+        Auth::logout();
+        return redirect()->route('login.create');
+
+    }
+
 }

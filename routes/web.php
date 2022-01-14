@@ -114,7 +114,11 @@ Route::get('/page/about', [PageController::class, 'show'])->name('page.about');
 /*send email*/
 Route::match(['get', 'post'], '/send', [ContactController::class, 'send'])->name('send-message');
 
-/*Auth*/
+/*Reg*/
 Route::get('/register', [UserController::class, 'create'])->name('register.create');
 Route::post('/register', [UserController::class, 'store'])->name('register.store');
 
+/*Auth*/
+Route::get('/login', [UserController::class, 'loginForm'])->name('login.create');
+Route::post('/login', [UserController::class, 'login'])->name('login');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');

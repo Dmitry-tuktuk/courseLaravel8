@@ -12,6 +12,10 @@
                             <li><a href="{{route('home')}}" class="text-white">Home</a></li>
                             <li><a href="{{route('page.about')}}" class="text-white">About</a></li>
                             <li><a href="{{route('register.create')}}" class="text-white">Registration</a></li>
+                            <li><a href="{{route('login.create')}}" class="text-white">Login</a></li>
+                            @if( \Illuminate\Support\Facades\Auth::check())
+                                <li><a href="{{route('logout')}}" class="text-white">Log out</a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -25,11 +29,16 @@
                 </a>
 
                 <a href="{{route('posts.create')}}" class="navbar-brand d-flex align-items-center">Create post</a>
-                <a href="{{route('register.create')}}" class="navbar-brand d-flex align-items-center">Registration</a>
 
-                @php
-                    dump(\Illuminate\Support\Facades\Auth::check())
-                @endphp
+                @auth
+                    <a href="#" class="navbar-brand d-flex align-items-center">{{auth()->user()->name}}</a>
+                    <a href="{{route('logout')}}" class="navbar-brand d-flex align-items-center">Log out</a>
+                @endauth
+
+                @guest
+                    <a href="{{route('register.create')}}" class="navbar-brand d-flex align-items-center">Registration</a>
+                    <a href="{{route('login.create')}}" class="navbar-brand d-flex align-items-center">Login</a>
+                @endauth
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
