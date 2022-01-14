@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DocController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
@@ -110,3 +111,5 @@ Route::get('/create', [HomeController::class, 'create'])->name('posts.create');
 Route::post('/', [HomeController::class, 'store'])->name('posts.store');
 
 Route::get('/page/about', [PageController::class, 'show'])->name('page.about');
+
+Route::get('/send', [ContactController::class, 'send']);
