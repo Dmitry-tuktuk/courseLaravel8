@@ -112,4 +112,4 @@ Route::post('/', [HomeController::class, 'store'])->name('posts.store');
 
 Route::get('/page/about', [PageController::class, 'show'])->name('page.about');
 
-Route::get('/send', [ContactController::class, 'send']);
+Route::match(['get', 'post'], '/send', [ContactController::class, 'send'])->name('send-message');

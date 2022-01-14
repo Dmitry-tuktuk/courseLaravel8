@@ -8,6 +8,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Письмо из сайта</h1>
+
+{!! $body !!}
+
+<img src="{{ $message->embed(url('/public/img/2.jpg')) }}" alt="error-img">
+
+
 </body>
 </html>
