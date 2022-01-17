@@ -22,14 +22,21 @@ class UserController extends Controller
         $request->validate([
            'name' => 'required',
            'email' => 'required|email|unique:users,email',
-           'password' => 'required|confirmed'
+           'password' => 'required|confirmed',
+           'avatar' => 'nullable|image'
         ]);
+
+        if ($request->hasFile('avatar')) {
+            $folder = date('Y-m-d');
+            $avatar = $request->file('avatar')->store("images/{$folder}");
+        }
 
         $user = User::create([
             //'name' => $request->input('name'),
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'avatar' => $avatar ?? null,
         ]);
 
 

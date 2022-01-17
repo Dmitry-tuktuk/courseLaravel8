@@ -12,7 +12,6 @@
                             <li><a href="{{route('home')}}" class="text-white">Home</a></li>
                             <li><a href="{{route('page.about')}}" class="text-white">About</a></li>
                             <li><a href="{{route('register.create')}}" class="text-white">Registration</a></li>
-                            <li><a href="{{route('admin')}}" class="text-white">Test Admin</a></li>
                             <li><a href="{{route('login.create')}}" class="text-white">Login</a></li>
                             @if( \Illuminate\Support\Facades\Auth::check())
                                 <li><a href="{{route('logout')}}" class="text-white">Log out</a></li>
@@ -32,7 +31,12 @@
                 <a href="{{route('posts.create')}}" class="navbar-brand d-flex align-items-center">Create post</a>
 
                 @auth
-                    <a href="#" class="navbar-brand d-flex align-items-center">{{auth()->user()->name}}</a>
+                    <a href="#" class="navbar-brand d-flex align-items-center">
+                        {{auth()->user()->name}}
+                        @if(auth()->user()->avatar)
+                            <img src="{{ asset('public/storage/'. auth()->user()->avatar) }}" alt="avatar.error" height="50">
+                        @endif
+                    </a>
                     <a href="{{route('logout')}}" class="navbar-brand d-flex align-items-center">Log out</a>
                 @endauth
 
