@@ -82,7 +82,6 @@ class HomeController extends Controller
             Cache::put('posts', $posts);
         }
 
-
         $h1 = 'Home page';
         $title = 'Home';
 

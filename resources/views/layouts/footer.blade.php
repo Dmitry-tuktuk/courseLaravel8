@@ -7,4 +7,10 @@
             <p class="mb-0">New to Bootstrap? <a href="/">Visit the homepage</a> or read our <a href="/docs/5.1/getting-started/introduction/">getting started guide</a>.</p>
             <p>Update - {{date('d.m.y')}}</p>
         </div>
+
+    @foreach($rubrics as $rubric)
+        <ul>
+            <li>{{$rubric->title}}</li>
+        </ul>
+    @endforeach
 </footer>
