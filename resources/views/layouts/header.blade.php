@@ -12,6 +12,7 @@
                             <li><a href="{{route('home')}}" class="text-white">Home</a></li>
                             <li><a href="{{route('page.about')}}" class="text-white">About</a></li>
                             <li><a href="{{route('register.create')}}" class="text-white">Registration</a></li>
+                            <li><a href="{{route('admin')}}" class="text-white">Test Admin</a></li>
                             <li><a href="{{route('login.create')}}" class="text-white">Login</a></li>
                             @if( \Illuminate\Support\Facades\Auth::check())
                                 <li><a href="{{route('logout')}}" class="text-white">Log out</a></li>

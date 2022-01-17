@@ -64,7 +64,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'admin' => \App\Http\Middleware\EnsureTokenIsValid::class,
+        /*'admin' => \App\Http\Middleware\EnsureTokenIsValid::class,*/
+        'admin' => \App\Http\Middleware\AdminMiddleWare::class,
     ];
     /**
      * Список посредников, отсортированный по приоритетности.

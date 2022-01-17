@@ -8,8 +8,8 @@
     <title>404</title>
 </head>
 <body>
-<h1>404</h1>
-<h1>{{ $exception->getMessage() }}</h1>
+
+<h1>404 - Page not found</h1>
 
 </body>
 </html>

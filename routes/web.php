@@ -7,6 +7,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Test\TestController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\MainController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -111,14 +112,23 @@ Route::get('/create', [HomeController::class, 'create'])->name('posts.create');
 Route::post('/', [HomeController::class, 'store'])->name('posts.store');
 Route::get('/page/about', [PageController::class, 'show'])->name('page.about');
 
-/*send email*/
+
+/*Send email*/
 Route::match(['get', 'post'], '/send', [ContactController::class, 'send'])->name('send-message');
 
-/*Reg*/
-Route::get('/register', [UserController::class, 'create'])->name('register.create');
-Route::post('/register', [UserController::class, 'store'])->name('register.store');
+Route::group(['middleware' => 'guest'], function(){
+    /*Reg*/
+    Route::get('/register', [UserController::class, 'create'])->name('register.create');
+    Route::post('/register', [UserController::class, 'store'])->name('register.store');
 
-/*Auth*/
-Route::get('/login', [UserController::class, 'loginForm'])->name('login.create');
-Route::post('/login', [UserController::class, 'login'])->name('login');
-Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+    /*Auth*/
+    Route::get('/login', [UserController::class, 'loginForm'])->name('login.create');
+    Route::post('/login', [UserController::class, 'login'])->name('login');
+});
+
+Route::get('/logout', [UserController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::group(['middleware' => 'admin', 'prefix' => 'admin', 'namespace' => 'Admin'], function (){
+    /*Admin zone*/
+    Route::get('/', [MainController::class, 'index'])->name('admin');
+});
