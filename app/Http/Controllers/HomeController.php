@@ -75,12 +75,19 @@ class HomeController extends Controller
 
         //dump(Cache::get('key'));
 
-        if (Cache::has('posts')) {
+        //$posts = Post::orderBy('id', 'desc')->get();
+
+/*        if (Cache::has('posts')) {
             $posts = Cache::get('posts');
         } else {
             $posts = Post::orderBy('id', 'desc')->get();
             Cache::put('posts', $posts);
-        }
+        }*/
+
+
+
+        /*Pagination*/
+        $posts = Post::orderBy('id', 'desc')->paginate(3);
 
         $h1 = 'Home page';
         $title = 'Home';
