@@ -87,7 +87,7 @@ class HomeController extends Controller
 
 
         /*Pagination*/
-        $posts = Post::orderBy('id', 'desc')->paginate(3);
+        $posts = Post::orderBy('created_at', 'desc')->paginate(3);
 
         $h1 = 'Home page';
         $title = 'Home';
