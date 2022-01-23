@@ -89,7 +89,7 @@
                 @endforeach
 
                 <div class="col-md-12">
-                    {{$posts->appends(['test' => request()->test])->links('vendor.pagination.my-pagination')}}
+                    {{$posts->onEachSide(2)->appends(['test' => request()->test])->links('vendor.pagination.my-pagination')}}
                 </div>
             </div>
         </div>
